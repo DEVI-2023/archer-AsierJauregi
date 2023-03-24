@@ -36,6 +36,7 @@ namespace Archer
         private void Awake()
         {
             offset = this.transform.position;
+            //distance = 
         }
 
         private void Update()
@@ -43,7 +44,9 @@ namespace Archer
             if (target.transform)
             {
                 this.transform.position = target.transform.position + offset;
-                
+                //this.transform.rotation = target.transform.rotation;
+                this.transform.LookAt(target);
+                this.transform.Rotate(new Vector3(angle, 0, 0));
             }
         }
 
