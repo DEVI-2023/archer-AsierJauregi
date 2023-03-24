@@ -33,9 +33,18 @@ namespace Archer
         [SerializeField]
         private float travelTime;
 
+        private void Awake()
+        {
+            offset = this.transform.position;
+        }
+
         private void Update()
         {
-  
+            if (target.transform)
+            {
+                this.transform.position = target.transform.position + offset;
+                
+            }
         }
 
     }
