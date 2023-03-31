@@ -25,13 +25,20 @@ namespace Archer
         // Método que se llamará cuando el enemigo reciba un impacto
         public void Hit()
         {
-         
+            animator.SetTrigger("Hit");
+            hitPoints--;
+            if (hitPoints <= 0)
+            {
+                Die();
+            }
         }
 
         private void Die()
         {
-           
+            animator.SetTrigger("Die");
         }
+
+
     }
 
 }
