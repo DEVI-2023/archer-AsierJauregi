@@ -35,19 +35,18 @@ namespace Archer
 
         private void Awake()
         {
-            offset = this.transform.position;
-            //distance = 
+           // offset = this.transform.position;
+            
         }
 
         private void Update()
         {
-            if (target.transform)
-            {
-                this.transform.position = target.transform.position + offset;
-                //this.transform.rotation = target.transform.rotation;
-                this.transform.LookAt(target);
-                this.transform.Rotate(new Vector3(angle, 0, 0));
-            }
+            Vector3 desiredPosition = target.transform.position + (Quaternion.Euler(0, angle, 0) * offset) - (target.forward * distance);
+            
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, travelTime / Time.deltaTime);
+            
+            transform.LookAt(target.position + offset);
+            
         }
 
     }
