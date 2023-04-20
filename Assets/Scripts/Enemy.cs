@@ -17,9 +17,12 @@ namespace Archer
 
         public event IScoreProvider.ScoreAddedHandler OnScoreAdded;
 
+        [SerializeField] private Light sunlight;
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            sunlight.gameObject.SetActive(false);
         }
 
         // Método que se llamará cuando el enemigo reciba un impacto
@@ -30,12 +33,15 @@ namespace Archer
             if (hitPoints <= 0)
             {
                 Die();
+                sunlight.gameObject.SetActive(true);
+                Destroy(this.gameObject);
             }
         }
 
-        private void Die()
+        private IEnumerator Die()
         {
             animator.SetTrigger("Die");
+            yield return new WaitForSeconds(1.3f);
         }
 
 
